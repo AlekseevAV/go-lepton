@@ -10,7 +10,7 @@ src="https://maruel.net/images/raspberrypirev2.jpg" width=107 height=71
 /></a> + <a
 href="https://twitter.com/groupgetscom/status/524762927895953409"><img
 src="https://maruel.net/images/flir.jpg" width=102 height=76 /></a> → <a
-href="https://github.com/maruel/go-lepton"><img
+href="https://github.com/israelshirk/go-lepton"><img
 src="https://maruel.net/images/photo_ir.png" /></a>
 
 
@@ -18,7 +18,7 @@ Prerequisite Setup
 ------------------
 
 Setup is fairly involved so it's in its dedicated
-[SETUP.md](https://github.com/maruel/go-lepton/blob/master/SETUP.md) page.
+[SETUP.md](https://github.com/israelshirk/go-lepton/blob/master/SETUP.md) page.
 
 
 Installing
@@ -27,7 +27,7 @@ Installing
 Building go-lepton on the Raspberry Pi v1 takes ~10s which is slow but still
 much faster than cross-compiling and transferring the file in.
 
-    go get github.com/maruel/go-lepton/cmd/lepton
+    go get github.com/israelshirk/go-lepton/cmd/lepton
 
 Then run `lepton`.
 

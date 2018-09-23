@@ -117,7 +117,7 @@ Create $HOME/start_lepton.sh with and edit as desired:
     echo "Starting run.sh"
     mv lepton.log "lepton.log.`date --rfc-3339=seconds`"
     while true; do
-      $GOPATH/src/github.com/maruel/go-lepton/run.sh &> lepton.log
+      $GOPATH/src/github.com/israelshirk/go-lepton/run.sh &> lepton.log
     done
 
 Then:
