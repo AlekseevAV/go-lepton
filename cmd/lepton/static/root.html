@@ -199,9 +199,9 @@
 
         var metadata = JSON.parse(encodedMetadata);
         elemInfo.innerText = JSON.stringify(metadata, null, 2);
-        elemAvg.innerText = avgV.toString();
-        elemMax.innerText = maxV.toString();
-        elemMin.innerText = minV.toString();
+        elemAvg.innerText = toC(avgV).toString();
+        elemMax.innerText = toC(maxV).toString();
+        elemMin.innerText = toC(minV).toString();
       });
 
       socket.addEventListener("error", function(event) {
@@ -213,6 +213,14 @@
         // Retry connecting every second.
         window.setTimeout(newSocket, 1000);
       });
+    }
+    
+    function toC(kVal) {
+      if (kVal > 0) {
+        return kVal / 100 - 273,15
+      } else {
+        return kVal
+      }
     }
 
     function websocketURL(s) {
