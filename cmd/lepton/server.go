@@ -47,7 +47,7 @@ func StartWebServer(port int) *WebServer {
 	mux.HandleFunc("/", w.root)
 	mux.HandleFunc("/favicon.ico", w.favicon)
 	mux.Handle("/stream", websocket.Handler(w.stream))
-	fmt.Printf("Listening on %d\n", port)
+	fmt.Printf("Listening on: %d\n", port)
 	go http.ListenAndServe(fmt.Sprintf(":%d", port), &loghttp.Handler{Handler: mux})
 	go func() {
 		<-interrupt.Channel
