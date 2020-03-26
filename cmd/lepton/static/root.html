@@ -181,6 +181,13 @@
         }
         contextSmall.putImageData(imgDataSmall, 0, 0);
 
+        var avgV = toC(avgV).toString();
+        var maxV = toC(maxV).toString();
+        var minV = toC(minV).toString();
+
+        // font
+        context.font = '5px bold Arial';
+
         // Render and stretch.
         context.save();
         context.scale(elemCanvas.height/canvasSmall.height, elemCanvas.width/canvasSmall.width);
@@ -188,20 +195,22 @@
         context.beginPath();
         context.strokeStyle = "blue";
         context.lineWidth = 0.1;
-        context.ellipse(minX, minY, 2, 2, 0, 0, 2 * Math.PI);
+        context.ellipse(minX, minY, 5, 5, 0, 0, 2 * Math.PI);
+        context.fillText(minV, minX - 4.5, minY + 1.2);
         context.stroke();
         context.beginPath();
         context.strokeStyle = "red";
         context.lineWidth = 0.1;
-        context.ellipse(maxX, maxY, 2, 2, 0, 0, 2 * Math.PI);
+        context.ellipse(maxX, maxY, 5, 5, 0, 0, 2 * Math.PI);
+        context.fillText(maxV, maxX - 4.5, maxY + 1.2);
         context.stroke();
         context.restore();
 
         var metadata = JSON.parse(encodedMetadata);
         elemInfo.innerText = JSON.stringify(metadata, null, 2);
-        elemAvg.innerText = toC(avgV).toString();
-        elemMax.innerText = toC(maxV).toString();
-        elemMin.innerText = toC(minV).toString();
+        elemAvg.innerText = avgV;
+        elemMax.innerText = maxV;
+        elemMin.innerText = minV;
       });
 
       socket.addEventListener("error", function(event) {
@@ -214,10 +223,10 @@
         window.setTimeout(newSocket, 1000);
       });
     }
-    
+
     function toC(kVal) {
       if (kVal > 0) {
-        return kVal / 100 - 273.15
+        return Number((kVal / 100 - 273.15).toFixed(1))
       } else {
         return kVal
       }
@@ -230,16 +239,22 @@
   </script>
 </head>
 <body onload="onload()">
-  <div id="errorMsg" class="errorMsg"></div><br>
-  <canvas id="canvas1" class="mainImg" width="800" height="600"></canvas>
-  <canvas id="canvasPalette" class="mainImg" width="50" height="256"></canvas>
-  <br>
-  <label><input id="useGray" type="checkbox" onchange="drawPalette()">Use gray palette</label>
-  Max: <div id="max"></div><br>
-  Min: <div id="min"></div><br>
-  Avg: <div id="avg"></div><br>
+<div id="content" style="width: 100%; display: inline-flex">
+  <div id="canvas" style="width: 1300px; display: inline-flex;">
+    <canvas id="canvas1" class="mainImg" width="1200" height="900"></canvas>
+    <canvas id="canvasPalette" class="mainImg" width="50" height="256"></canvas>
+  </div>
+  <div id="data">
+    <div id="errorMsg" class="errorMsg"></div><br>
+    <label><input id="useGray" type="checkbox" onchange="drawPalette()">Use gray palette</label>
+    <br>
+    Max: <div id="max"></div><br>
+    Min: <div id="min"></div><br>
+    Avg: <div id="avg"></div><br>
 
-  Raw data:<br>
-  <div id="info" class="info">Infos</div>
+    Raw data:<br>
+    <div id="info" class="info">Infos</div>
+  </div>
+</div>
 </body>
 </html>
